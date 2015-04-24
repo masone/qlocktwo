@@ -18,3 +18,6 @@ Arduino based DIY qlocktwo clone. French. Original: http://qlocktwo.com
 * 8806 led strip code examples: https://learn.adafruit.com/adafruit-neopixel-uberguide/arduino-library
 * Wire library (i2c): http://playground.arduino.cc/Main/WireLibraryDetailedReference
 * Font: Din regular, 59$: http://www.fonts.com/font/fontfont/ff-din/regular
+* Handling vinyl foils, weeding, transfer tape, etc: https://www.youtube.com/watch?v=9TwPV1Wdoog
+* Oracal 631-070: http://www.orafol.com/gp/americas/en/products/search-result-gpam-product-details/items/oracal-631-exhibition-cal
+* Oratape HT55: http://www.orafol.com/gp/americas/en/products/sign-display-tapes-9755-product-details/items/oratape-ht55-decorative-film-application-tape

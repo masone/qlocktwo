@@ -28,6 +28,8 @@ void (*words_minute[12])();
 void setup () {
   Serial.begin(57600);
   pinMode(buttonPin, INPUT);
+ 
+  Serial.println("run");
   
   init_leds();
   init_rtc();
@@ -331,9 +333,9 @@ void _neuf(){
   light_on(38);
 }
 void _dix(){
-  light_on(87);
-  light_on(94);
-  light_on(107);
+  light_on(25);
+  light_on(36);
+  light_on(45);
 }
 void _onze(){
   light_on(6);

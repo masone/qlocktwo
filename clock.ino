@@ -7,8 +7,8 @@
 // RTC SCL (yellow): Analog in 5
 // RTC SDA (blue): Analog in 4
 
-int ledDataPin  = 6; // LED DI (blue)
-int ledClockPin = 7; // LED CI (yellow)
+int ledDataPin  = 6; // LED DI (blue), digital
+int ledClockPin = 7; // LED CI (yellow), digital
 int lightPin = 1; // Photoresistor, Analog
 int buttonPin = 4; // Push button, digital
 
@@ -20,7 +20,7 @@ int nLEDs = 118;
 int reset = 1;
 
 RTC_DS1307 rtc;
-LPD8806 leds = LPD8806(nLEDs, ledDataPin, ledClockPin);  
+LPD8806 leds = LPD8806(nLEDs, ledDataPin, ledClockPin);
 
 void (*words_hour[24])();
 void (*words_minute[12])();
@@ -28,21 +28,21 @@ void (*words_minute[12])();
 void setup () {
   Serial.begin(57600);
   pinMode(buttonPin, INPUT);
- 
+
   Serial.println("run");
-  
+
   init_leds();
   init_rtc();
 }
 
 void loop() {
   now = rtc.now();
-  
-  reset_leds();  
+
+  reset_leds();
   setup_words();
-  adapt_intensity();  
+  adapt_intensity();
   check_reset();
-  
+
   if(digitalRead(buttonPin) == HIGH){
     test_words();
   }else{
@@ -87,7 +87,7 @@ void error(){
 }
 
 void check_reset(){
-  if(reset == 1 && digitalRead(buttonPin) == HIGH){    
+  if(reset == 1 && digitalRead(buttonPin) == HIGH){
     Serial.println(F("Resetting time to..."));
     Serial.println(__TIME__);
     Serial.println(__DATE__);
@@ -110,41 +110,41 @@ void display_time(){
   int rounded_minute = minute-rest_minute;
 
   print_time(hour, minute, second);
-  
+
   _il_est();
   _heures();
   show_hour(hour);
   show_minute(rounded_minute);
   show_minute_edges(rest_minute);
-  
+
   leds.show();
 }
 
 void setup_words(){
-  words_hour[0] = _minuit;  
+  words_hour[0] = _minuit;
   words_hour[1] = _une;
   words_hour[2] = _deux;
   words_hour[3] = _trois;
   words_hour[4] = _quatre;
-  words_hour[5] = _cinq;  
-  words_hour[6] = _six;  
-  words_hour[7] = _sept;  
-  words_hour[8] = _huit;  
+  words_hour[5] = _cinq;
+  words_hour[6] = _six;
+  words_hour[7] = _sept;
+  words_hour[8] = _huit;
   words_hour[9] = _neuf;
   words_hour[10] = _dix;
   words_hour[11] = _onze;
   words_hour[12] = _midi;
-  words_hour[13] = _une;  
+  words_hour[13] = _une;
   words_hour[14] = _deux;
-  words_hour[15] = _trois;  
-  words_hour[16] = _quatre;  
-  words_hour[17] = _cinq; 
-  words_hour[18] = _six;  
-  words_hour[19] = _sept;  
-  words_hour[20] = _huit;  
+  words_hour[15] = _trois;
+  words_hour[16] = _quatre;
+  words_hour[17] = _cinq;
+  words_hour[18] = _six;
+  words_hour[19] = _sept;
+  words_hour[20] = _huit;
   words_hour[21] = _neuf;
   words_hour[22] = _dix;
-  words_hour[23] = _onze; 
+  words_hour[23] = _onze;
 
   words_minute[0] = _nul;
   words_minute[5] = _cinq2;
@@ -157,7 +157,7 @@ void setup_words(){
   words_minute[40] = _moins_vingt;
   words_minute[45] = _moins_le_quart;
   words_minute[50] = _moins_dix;
-  words_minute[55] = _moins_cinq;  
+  words_minute[55] = _moins_cinq;
 }
 
 void test_words(){
@@ -177,9 +177,9 @@ void test_hours(){
 
 void test_minutes(){
   for(int i=0; i < 200; i++) {
-    reset_leds();    
+    reset_leds();
     show_minute(i*5);
-    leds.show();    
+    leds.show();
     delay(3000);
   }
 }
@@ -189,7 +189,7 @@ void test_edges(){
     reset_leds();
     show_minute_edges(i);
     leds.show();
-    delay(1000);  
+    delay(1000);
   }
 }
 
@@ -199,7 +199,7 @@ void reset_leds(){
   }
 }
 
-void light_on(int i){  
+void light_on(int i){
   leds.setPixelColor(i-1, color());
 }
 
@@ -211,7 +211,7 @@ uint32_t color(){
   if((day == 8 && month == 4) || (day == 6 && month == 10)){
     return Wheel(map(second, 0, 60, 0, 384));
   } else {
-    return leds.Color(intensity, intensity, intensity);  
+    return leds.Color(intensity, intensity, intensity);
   }
 }
 
@@ -221,7 +221,7 @@ void light_off(int i){
 
 void show_hour(int i){
   (*words_hour[i])();
-}  
+}
 
 void show_minute(int i){
   (*words_minute[i])();
@@ -263,11 +263,11 @@ void _mmmm(){
 
 void _heures(){
   light_on(55);
-  light_on(66);  
-  light_on(75);  
-  light_on(86);  
-  light_on(95);  
-  light_on(106);  
+  light_on(66);
+  light_on(75);
+  light_on(86);
+  light_on(95);
+  light_on(106);
 }
 void _il_est(){
   light_on(1);
@@ -280,13 +280,13 @@ void _il_est(){
 void _une(){
   light_on(43);
   light_on(58);
-  light_on(63);  
+  light_on(63);
 }
 void _deux(){
   light_on(80);
   light_on(81);
-  light_on(100);  
-  light_on(101);  
+  light_on(100);
+  light_on(101);
 }
 void _trois(){
   light_on(62);
@@ -346,8 +346,8 @@ void _onze(){
 void _midi(){
   light_on(5);
   light_on(16);
-  light_on(25);  
-  light_on(36);  
+  light_on(25);
+  light_on(36);
 }
 void _minuit(){
   light_on(56);
@@ -408,7 +408,7 @@ void _et_demie(){
 
   light_on(31);
   light_on(50);
-  light_on(51);  
+  light_on(51);
   light_on(70);
   light_on(71);
 }
@@ -454,17 +454,17 @@ uint32_t Wheel(int WheelPos)
       r = 127 - WheelPos % 128;   //Red down
       g = WheelPos % 128;      // Green up
       b = 0;                  //blue off
-      break; 
+      break;
     case 1:
       g = 127 - WheelPos % 128;  //green down
       b = WheelPos % 128;      //blue up
       r = 0;                  //red off
-      break; 
+      break;
     case 2:
-      b = 127 - WheelPos % 128;  //blue down 
+      b = 127 - WheelPos % 128;  //blue down
       r = WheelPos % 128;      //red up
       g = 0;                  //green off
-      break; 
+      break;
   }
   return(leds.Color(r,g,b));
 }

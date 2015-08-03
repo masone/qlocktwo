@@ -106,6 +106,10 @@ void display_time(){
   int minute = now.minute();
   int second = now.second();
 
+  if(minute > 30){
+    hour = hour+1; // adjusts the hour. at 7:35, the french actually say "8 moins 25"
+  }
+
   int rest_minute = (minute % 5);
   int rounded_minute = minute-rest_minute;
 

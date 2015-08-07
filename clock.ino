@@ -113,15 +113,18 @@ void display_time(){
   int rest_minute = (minute % 5);
   int rounded_minute = minute-rest_minute;
 
-  print_time(hour, minute, second);
-
   _il_est();
-  _heures();
+
+  if(hour % 12 != 0){
+    _heures(); // show the word "hours" unless it's 00:xx or 12:xx
+  }
+
   show_hour(hour);
   show_minute(rounded_minute);
   show_minute_edges(rest_minute);
 
   leds.show();
+  print_time(hour, minute, second);
 }
 
 void setup_words(){

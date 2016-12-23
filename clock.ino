@@ -25,11 +25,9 @@ LPD8806 leds = LPD8806(nLEDs, ledDataPin, ledClockPin);
 void (*words_hour[24])();
 void (*words_minute[12])();
 
-void setup () {
+void setup() {
   Serial.begin(57600);
   pinMode(buttonPin, INPUT);
-
-  Serial.println("run");
 
   init_leds();
   init_rtc();
@@ -75,8 +73,8 @@ void init_rtc(){
   rtc.begin();
 
   if (!rtc.isrunning()) {
+    // Time is not set. Upload sketch, hold button to set the time.
     error();
-    // following line sets the RTC to the date & time this sketch was compiled
     Serial.println("RTC is NOT running!");
   }
 }
@@ -210,6 +208,10 @@ void light_on(int i){
   leds.setPixelColor(i-1, color());
 }
 
+void light_off(int i){
+  leds.setPixelColor(i-1, 0);
+}
+
 uint32_t color(){
   int month = now.month();
   int day = now.day();
@@ -220,10 +222,6 @@ uint32_t color(){
   } else {
     return leds.Color(intensity, intensity, intensity);
   }
-}
-
-void light_off(int i){
-  leds.setPixelColor(i-1, 0);
 }
 
 void show_hour(int i){

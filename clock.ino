@@ -31,16 +31,14 @@ void setup() {
 
   init_leds();
   init_rtc();
+  check_reset();
+  setup_words();
   test_all();
 }
 
 void loop() {
-  now = rtc.now();
-
-  reset_leds();
-  setup_words();
+  now = rtc.now();  
   adapt_intensity();
-  check_reset();
 
   if(digitalRead(buttonPin) == HIGH){
     test_words();
@@ -119,7 +117,7 @@ void display_time(){
   }
 
   show_hour(hour);
-  show_minute(rounded_minute);
+  show_minute(rounded_minute / 5);
   show_minute_edges(rest_minute);
 
   leds.show();
@@ -153,61 +151,61 @@ void setup_words(){
   words_hour[23] = _onze;
 
   words_minute[0] = _nul;
-  words_minute[5] = _cinq2;
-  words_minute[10] = _dix2;
-  words_minute[15] = _et_quart;
-  words_minute[20] = _vingt;
-  words_minute[25] = _vingt_cinq;
-  words_minute[30] = _et_demie;
-  words_minute[35] = _moins_vingt_cinq;
-  words_minute[40] = _moins_vingt;
-  words_minute[45] = _moins_le_quart;
-  words_minute[50] = _moins_dix;
-  words_minute[55] = _moins_cinq;
+  words_minute[1] = _cinq2;
+  words_minute[2] = _dix2;
+  words_minute[3] = _et_quart;
+  words_minute[4] = _vingt;
+  words_minute[5] = _vingt_cinq;
+  words_minute[6] = _et_demie;
+  words_minute[7] = _moins_vingt_cinq;
+  words_minute[8] = _moins_vingt;
+  words_minute[9] = _moins_le_quart;
+  words_minute[10] = _moins_dix;
+  words_minute[11] = _moins_cinq;
 }
 
 void test_all(){
-  reset_leds();
   for(int i=0; i < nLEDs; i++) {
     light_on(i+1);
     leds.show();
     delay(50);
   }
-  delay(50000);
+  delay(3000);
+  reset_leds();
 }
 
 
 void test_words(){
-  test_edges();
   test_hours();
   test_minutes();
+  test_edges();
 }
 
 void test_hours(){
-  for(int i=0; i < 24; i++) {
-    reset_leds();
+  for(int i=0; i < 24; i++){
     show_hour(i);
     leds.show();
-    delay(3000);
+    delay(1500);
+    reset_leds();
   }
 }
 
 void test_minutes(){
-  for(int i=0; i < 200; i++) {
-    reset_leds();
-    show_minute(i*5);
+  for(int i=1; i < 12; i++){
+    show_minute(i);
     leds.show();
-    delay(3000);
+    delay(1500);
+    reset_leds();
   }
 }
 
 void test_edges(){
   for(int i=1; i <= 4; i++) {
-    reset_leds();
     show_minute_edges(i);
     leds.show();
-    delay(1000);
-  }
+    delay(1500);
+    reset_leds();
+  }  
 }
 
 void reset_leds(){
@@ -485,3 +483,5 @@ uint32_t Wheel(int WheelPos)
   }
   return(leds.Color(r,g,b));
 }
+
+

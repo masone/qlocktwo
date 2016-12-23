@@ -21,3 +21,9 @@ Arduino based DIY qlocktwo clone. French. Original: http://qlocktwo.com
 * Handling vinyl foils, weeding, transfer tape, etc: https://www.youtube.com/watch?v=9TwPV1Wdoog
 * Oracal 631-070: http://www.orafol.com/gp/americas/en/products/search-result-gpam-product-details/items/oracal-631-exhibition-cal
 * Oratape HT55: http://www.orafol.com/gp/americas/en/products/sign-display-tapes-9755-product-details/items/oratape-ht55-decorative-film-application-tape
+
+## Material
+
+* Vinyl sticker: 456x456mm, black matt, Reverse Cut from https://www.vinylletteringonline.co.uk
+* Magnets: MM-S15-3N, 15x3mm, NiCuNi, 2.9kg from https://www.supermagnete.ch
+* Wood and glass: 456x456mm from http://jumbo.ch

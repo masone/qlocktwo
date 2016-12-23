@@ -13,7 +13,7 @@ int lightPin = 1; // Photoresistor, Analog
 int buttonPin = 4; // Push button, digital
 
 DateTime now;
-int intensity = 50;
+int intensity = 100;
 int min_intensity = 10;
 int max_intensity = intensity;
 int nLEDs = 118;
@@ -31,6 +31,7 @@ void setup() {
 
   init_leds();
   init_rtc();
+  test_all();
 }
 
 void loop() {
@@ -165,6 +166,17 @@ void setup_words(){
   words_minute[55] = _moins_cinq;
 }
 
+void test_all(){
+  reset_leds();
+  for(int i=0; i < nLEDs; i++) {
+    light_on(i+1);
+    leds.show();
+    delay(50);
+  }
+  delay(50000);
+}
+
+
 void test_words(){
   test_edges();
   test_hours();
@@ -217,10 +229,10 @@ uint32_t color(){
   int day = now.day();
   int second = now.second();
 
-  if((day == 8 && month == 4) || (day == 6 && month == 10)){
+  if((day == 8 && month == 4) || (day == 6 && month == 10)  || (day == 14 && month == 9)){
     return Wheel(map(second, 0, 60, 0, 384));
   } else {
-    return leds.Color(intensity, intensity, intensity);
+    return leds.Color(intensity*0.8, intensity*0.9, intensity);
   }
 }
 

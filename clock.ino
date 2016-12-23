@@ -40,6 +40,7 @@ void loop() {
   now = rtc.now();  
   adapt_intensity();
 
+  reset_leds();
   if(digitalRead(buttonPin) == HIGH){
     test_words();
   }else{

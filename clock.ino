@@ -113,7 +113,9 @@ void display_time(){
 
   _il_est();
 
-  if(hour % 12 != 0){
+  if(hour == 1 || hour == 13){
+    _heure();
+  } else if (hour % 12 != 0){
     _heures(); // show the word "hours" unless it's 00:xx or 12:xx
   }
 
@@ -277,12 +279,15 @@ void _mmmm(){
   light_on(114);
 }
 
-void _heures(){
+void _heure(){
   light_on(55);
   light_on(66);
   light_on(75);
   light_on(86);
   light_on(95);
+}
+void _heures(){
+  _heure();
   light_on(106);
 }
 void _il_est(){

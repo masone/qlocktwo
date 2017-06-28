@@ -1,6 +1,8 @@
 # qlocktwo
 
 Arduino based DIY qlocktwo clone. French. Original: http://qlocktwo.com
+
+![](qlocktwo.jpg?raw=true)
          
 ## Inspiration
 
